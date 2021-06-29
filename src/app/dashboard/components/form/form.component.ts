@@ -1,25 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'dashboard-form',
   styleUrls: ['./form.component.scss'],
   template: `
     <div class="form">
-    <h4 class="form__title">Dashboard Form component</h4>
-    <form  #form="ngForm" novalidate>
-      <label class="form__label">
-        <span class="form__text"> Login </span>
-        <input class="form__input" type="text" />
-      </label>
-      
-      <label class="form__label">
-        <span class="form__text"> Password </span>
-        <input class="form__input" type="text" />
-      </label>
+      <ng-content select="[form-title]"></ng-content>
 
-      <button class="form__button">Submit</button>
-    </form>
-  </div>
+      <form (ngSubmit)="onSubmit(form.value)" #form="ngForm" novalidate>
+        <label class="form__label">
+          <span class="form__text"> Login </span>
+          <input ngModel name="login" class="form__input" type="text" />
+        </label>
+
+        <label class="form__label">
+          <span class="form__text"> Password </span>
+          <input ngModel name="password" class="form__input" type="text" />
+        </label>
+
+        <ng-content select="dashboard-remember-me"> </ng-content>
+        
+        <ng-content select="[submit-button]"></ng-content>
+      </form>
+    </div>
   `,
 })
-export class FormComponent {}
+export class FormComponent {
+  @Output() submitForm = new EventEmitter<any>();
+
+  onSubmit(event: any) {
+    this.submitForm.emit(event);
+  }
+}
