@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
       </dashboard-form>
     </div>
   `,
-})
+}) 
 export class AuthPanelComponent {
   rememberMe: boolean = false;
 
