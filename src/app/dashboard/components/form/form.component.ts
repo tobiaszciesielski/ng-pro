@@ -6,7 +6,8 @@ import {
   AfterContentInit,
   ViewChild,
   AfterViewInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ElementRef
 } from '@angular/core';
 import { RememberMeComponent } from '../remember-me/remember-me.component';
 import { AuthMessageComponent } from '../auth-message/auth-message.component';
@@ -23,12 +24,12 @@ import { AuthMessageComponent } from '../auth-message/auth-message.component';
       <form (ngSubmit)="onSubmit(form.value)" #form="ngForm" novalidate>
         <label class="form__label">
           <span class="form__text"> Login </span>
-          <input ngModel name="login" class="form__input" type="text" />
+          <input ngModel name="login" class="form__input" type="text" #login/>
         </label>
 
         <label class="form__label">
           <span class="form__text"> Password </span>
-          <input ngModel name="password" class="form__input" type="text" />
+          <input ngModel name="password" class="form__input" type="text" #password/>
         </label>
 
         <ng-content select="dashboard-remember-me"> </ng-content>
@@ -49,22 +50,26 @@ export class FormComponent implements AfterContentInit, AfterViewInit {
   @ContentChild(RememberMeComponent) remember!: RememberMeComponent;
   
   @ViewChild(AuthMessageComponent) message!: AuthMessageComponent;
+  @ViewChild('login') login!: ElementRef;
+  @ViewChild('password') password!: ElementRef;
 
   showMessage: boolean = false;
 
   constructor(private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
+    this.login.nativeElement.setAttribute('placeholder', 'Enter your login')
+    this.password.nativeElement.setAttribute('placeholder', 'Enter your password')
+    
     this.message.days = 30;
     this.cd.detectChanges()
   }
-
+  
   ngAfterContentInit() {
     if (!!this.message) {
       this.message.days = 30;
     }
 
-    console.log('ngAfterContentInit', this.message);
     if (!!this.remember) {
       this.remember.checked.subscribe(
         (value: boolean) => (this.showMessage = value)
