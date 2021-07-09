@@ -9,9 +9,11 @@ import { Component } from '@angular/core';
 
       <dashboard-form (submitForm)="handleSubmit($event)">
         <h4 form-title class="form__title">Login Form</h4>
+        
         <button submit-button type="submit" class="form__button">
           Sign in
         </button>
+        
         <dashboard-remember-me
           (checked)="handleChecked($event)"
         ></dashboard-remember-me>
@@ -19,6 +21,7 @@ import { Component } from '@angular/core';
 
       <dashboard-form (submitForm)="handleLogin($event)">
         <h4 form-title class="form__title">Register Form</h4>
+        
         <button submit-button type="submit" class="form__button">
           Sign up
         </button>
