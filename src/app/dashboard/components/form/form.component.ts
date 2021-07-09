@@ -1,5 +1,15 @@
-import { Component, Output, EventEmitter, ContentChild, AfterContentInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  ContentChild,
+  AfterContentInit,
+  ViewChild,
+  AfterViewInit,
+  OnInit,
+} from '@angular/core';
 import { RememberMeComponent } from '../remember-me/remember-me.component';
+import { AuthMessageComponent } from '../auth-message/auth-message.component';
 
 @Component({
   selector: 'dashboard-form',
@@ -20,22 +30,34 @@ import { RememberMeComponent } from '../remember-me/remember-me.component';
         </label>
 
         <ng-content select="dashboard-remember-me"> </ng-content>
-        <p *ngIf="showMessage">You will be logged in <br/> for 30 days<p>
+        <!-- <p *ngIf="showMessage">You will be logged in <br/> for 30 days<p> -->
+        <dashboard-auth-message
+          [style.display]="showMessage ? 'inherit' : 'none'"
+        ></dashboard-auth-message>
         <ng-content select="[submit-button]"></ng-content>
       </form>
     </div>
   `,
 })
-export class FormComponent implements AfterContentInit {
+export class FormComponent implements AfterContentInit, AfterViewInit {
   @Output() submitForm = new EventEmitter<any>();
 
   showMessage: boolean = false;
 
-  @ContentChild(RememberMeComponent) remember! : RememberMeComponent;  
+  @ContentChild(RememberMeComponent) remember!: RememberMeComponent;
+  @ViewChild(AuthMessageComponent) message!: AuthMessageComponent;
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.message.days = 30
+    }, 0)
+  }
 
   ngAfterContentInit() {
-    if(!!this.remember) {
-      this.remember.checked.subscribe((value: boolean) => this.showMessage = value)
+    if (!!this.remember) {
+      this.remember.checked.subscribe(
+        (value: boolean) => (this.showMessage = value)
+      );
     }
   }
 
