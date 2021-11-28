@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'dashboard-auth-panel',
   styleUrls: ['./auth-panel.component.scss'],
   template: `
-    <div class="auth-panel">
+
       <h3>Dashboard Auth Panel Component</h3>
 
       <dashboard-form (onSubmit)="handleLogin($event)">
@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
         <h3 heading>Create user</h3>
         <button class="form__button" submitButton type="submit">Submit</button>
       </dashboard-form>
-    </div>
+
   `,
 })
 export class AuthPanelComponent {

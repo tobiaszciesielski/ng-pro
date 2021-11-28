@@ -5,13 +5,22 @@
   background-color: #143c57;
   padding: 20px;
   border-radius: 10px;
+  gap: 20px;
 
   &__title {
     text-align: center;
-    margin-bottom: 40px;
   }
 
   &__forms {
     margin-bottom: 20px;
+  }
+
+  &__panel {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    border-radius: 10px;
+    background-color: rgb(17, 82, 107);
   }
 }

@@ -11,6 +11,7 @@ import { AuthPanelComponent } from './containers/auth-panel/auth-panel.component
 // Components
 import { DashboardComponent } from './dashboard.component';
 import { SimpleFormComponent } from './components/simple-form/simple-form.component';
+import { AuthFormComponent } from './containers/auth-form/auth-form.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SimpleFormComponent } from './components/simple-form/simple-form.compon
     RememberMeComponent,
     AuthMessageComponent,
     SimpleFormComponent,
+    AuthFormComponent,
   ],
   imports: [BrowserModule, FormsModule],
   exports: [DashboardComponent],
