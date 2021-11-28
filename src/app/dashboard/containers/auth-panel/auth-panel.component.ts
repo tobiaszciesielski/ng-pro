@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
       <dashboard-form (onSubmit)="handleLogin($event)">
         <h3 heading>Login</h3>
 
-        <button submitButton type="submit">Login</button>
+        <button class="form__button" submitButton type="submit">Login</button>
 
         <dashboard-remember-me
           remember-me
@@ -21,7 +21,7 @@ import { Component } from '@angular/core';
 
       <dashboard-form (onSubmit)="handleCreateUser($event)">
         <h3 heading>Create user</h3>
-        <button submitButton type="submit">Submit</button>
+        <button class="form__button" submitButton type="submit">Submit</button>
       </dashboard-form>
     </div>
   `,

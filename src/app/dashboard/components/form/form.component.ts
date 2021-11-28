@@ -42,13 +42,14 @@ import { AuthMessageComponent } from '../auth-message/auth-message.component';
         />
       </label>
 
-      <ng-content select="[submitButton]"></ng-content>
-
       <ng-content select="[remember-me]"></ng-content>
 
       <dashboard-auth-message
         [style.display]="showRememberMessage ? 'inherit' : 'none'"
       ></dashboard-auth-message>
+
+      <ng-content select="[submitButton]"></ng-content>
+
       <!-- <span *ngIf="showRememberMessage">
         You will be remember for 30 days
       </span> -->

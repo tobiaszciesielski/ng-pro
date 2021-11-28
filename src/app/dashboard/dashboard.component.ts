@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   template: `
     <div class="dashboard">
       <h2 class="dashboard__title">Dashboard Component</h2>
-      <dashboard-auth-panel></dashboard-auth-panel>
+      <dashboard-auth-panel class="dashboard__forms"></dashboard-auth-panel>
+      <h2 class="dashboard__title">Simple form component</h2>
+      <dashboard-simple-form></dashboard-simple-form>
     </div>
   `,
 })

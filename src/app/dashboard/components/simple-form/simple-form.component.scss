@@ -1,0 +1,41 @@
+.form {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #113250;
+  border-radius: 10px;
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  &__text {
+    display: block;
+    font-size: 12px;
+  }
+
+  &__input {
+    padding: 7px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+  }
+
+  &__button {
+    display: block;
+    padding: 7px 10px;
+    width: 100%;
+    color: #eee;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #486ab3;
+  }
+}
