@@ -1,13 +1,12 @@
 import {
-  Component,
-  Output,
-  EventEmitter,
-  ContentChild,
   AfterContentInit,
-  ViewChild,
   AfterViewInit,
-  ChangeDetectorRef,
-  ElementRef
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
 } from '@angular/core';
 import { RememberMeComponent } from '../remember-me/remember-me.component';
 import { AuthMessageComponent } from '../auth-message/auth-message.component';
@@ -15,69 +14,77 @@ import { AuthMessageComponent } from '../auth-message/auth-message.component';
 @Component({
   selector: 'dashboard-form',
   styleUrls: ['./form.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush, // to odapala detekcje zmian
-  // tylko na zmianach w inputach
   template: `
-    <div class="form">
-      <ng-content select="[form-title]"></ng-content>
+    <form class="form" #form="ngForm" (ngSubmit)="onSubmit.emit(form.value)">
+      <ng-content select="[heading]"></ng-content>
 
-      <form (ngSubmit)="onSubmit(form.value)" #form="ngForm" novalidate>
-        <label class="form__label">
-          <span class="form__text"> Login </span>
-          <input ngModel name="login" class="form__input" type="text" #login/>
-        </label>
+      <label class="form__label">
+        <span class="form__text">Email</span>
+        <input
+          #email
+          ngModel
+          name="email"
+          class="form__input"
+          type="text"
+          placeholder="email"
+        />
+      </label>
 
-        <label class="form__label">
-          <span class="form__text"> Password </span>
-          <input ngModel name="password" class="form__input" type="text" #password/>
-        </label>
+      <label class="form__label">
+        <span class="form__text">Password</span>
+        <input
+          #password
+          ngModel
+          name="password"
+          class="form__input"
+          type="password"
+          placeholder="password"
+        />
+      </label>
 
-        <ng-content select="dashboard-remember-me"> </ng-content>
-        <!-- <p *ngIf="showMessage">You will be logged in <br/> for 30 days<p> -->
+      <ng-content select="[submitButton]"></ng-content>
 
-        <dashboard-auth-message
-          [style.display]="showMessage ? 'inherit' : 'none'"
-        ></dashboard-auth-message>
+      <ng-content select="[remember-me]"></ng-content>
 
-        <ng-content select="[submit-button]"></ng-content>
-      </form>
-    </div>
+      <dashboard-auth-message
+        [style.display]="showRememberMessage ? 'inherit' : 'none'"
+      ></dashboard-auth-message>
+      <!-- <span *ngIf="showRememberMessage">
+        You will be remember for 30 days
+      </span> -->
+    </form>
   `,
 })
 export class FormComponent implements AfterContentInit, AfterViewInit {
-  @Output() submitForm = new EventEmitter<any>();
-  
-  @ContentChild(RememberMeComponent) remember!: RememberMeComponent;
-  
-  @ViewChild(AuthMessageComponent) message!: AuthMessageComponent;
-  @ViewChild('login') login!: ElementRef;
-  @ViewChild('password') password!: ElementRef;
+  @ViewChild(AuthMessageComponent) authMessageComponent!: AuthMessageComponent;
 
-  showMessage: boolean = false;
+  @ViewChild('email') emailInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  @ViewChild('password') passwordInput!: ElementRef<HTMLInputElement>;
 
-  ngAfterViewInit() {
-    this.login.nativeElement.setAttribute('placeholder', 'Enter your login')
-    this.password.nativeElement.setAttribute('placeholder', 'Enter your password')
-    
-    this.message.days = 30;
-    this.cd.detectChanges()
-  }
-  
-  ngAfterContentInit() {
-    if (!!this.message) {
-      this.message.days = 30;
+  @ContentChild(RememberMeComponent)
+  rememberMeComponent: RememberMeComponent | null = null;
+
+  @Output() onSubmit = new EventEmitter<any>();
+
+  showRememberMessage: boolean = false;
+
+  ngAfterContentInit(): void {
+    if (this.authMessageComponent) {
+      this.authMessageComponent.days = 30;
     }
 
-    if (!!this.remember) {
-      this.remember.checked.subscribe(
-        (value: boolean) => (this.showMessage = value)
-      );
-    }
+    this.rememberMeComponent?.checked.subscribe(
+      (checked: boolean) => (this.showRememberMessage = checked)
+    );
   }
 
-  onSubmit(event: any) {
-    this.submitForm.emit(event);
+  ngAfterViewInit(): void {
+    this.emailInput.nativeElement.setAttribute(
+      'placeholder',
+      'ex. name@domain.pl'
+    );
+
+    this.emailInput.nativeElement.focus();
   }
 }

@@ -7,40 +7,37 @@ import { Component } from '@angular/core';
     <div class="auth-panel">
       <h3>Dashboard Auth Panel Component</h3>
 
-      <dashboard-form (submitForm)="handleSubmit($event)">
-        <h4 form-title class="form__title">Login Form</h4>
-        
-        <button submit-button type="submit" class="form__button">
-          Sign in
-        </button>
-        
+      <dashboard-form (onSubmit)="handleLogin($event)">
+        <h3 heading>Login</h3>
+
+        <button submitButton type="submit">Login</button>
+
         <dashboard-remember-me
-          (checked)="handleChecked($event)"
-        ></dashboard-remember-me>
+          remember-me
+          (checked)="handleRememberUser($event)"
+        >
+        </dashboard-remember-me>
       </dashboard-form>
 
-      <dashboard-form (submitForm)="handleLogin($event)">
-        <h4 form-title class="form__title">Register Form</h4>
-        
-        <button submit-button type="submit" class="form__button">
-          Sign up
-        </button>
+      <dashboard-form (onSubmit)="handleCreateUser($event)">
+        <h3 heading>Create user</h3>
+        <button submitButton type="submit">Submit</button>
       </dashboard-form>
     </div>
   `,
-}) 
+})
 export class AuthPanelComponent {
   rememberMe: boolean = false;
 
-  handleSubmit(event: any) {
-    console.log('submitted:', event.password, event.login, this.rememberMe);
-  }
-
   handleLogin(event: any) {
-    console.log('logged:', event.password, event.login, this.rememberMe);
+    console.log('handleLogin:', event);
   }
 
-  handleChecked(value: boolean) {
+  handleCreateUser(event: any) {
+    console.log('handleCreateUser:', event);
+  }
+
+  handleRememberUser(value: boolean) {
     this.rememberMe = value;
   }
 }
