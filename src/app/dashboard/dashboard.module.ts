@@ -11,13 +11,17 @@ import { AuthPanelComponent } from './containers/auth-panel/auth-panel.component
 // Components
 import { DashboardComponent } from './dashboard.component';
 import { SimpleFormComponent } from './components/simple-form/simple-form.component';
+import { PushStrategyComponent } from './containers/push-strategy/push-strategy.component';
 import { AuthFormComponent } from './containers/auth-form/auth-form.component';
+import { OnPushStrategyComponent } from './components/on-push-strategy/on-push-strategy.component';
+import { DefaultStrategyComponent } from './components/default-strategy/default-strategy.component';
 
 @NgModule({
   declarations: [
     // Containers
     DashboardComponent,
     AuthPanelComponent,
+    PushStrategyComponent,
 
     // Components
     FormComponent,
@@ -25,6 +29,9 @@ import { AuthFormComponent } from './containers/auth-form/auth-form.component';
     AuthMessageComponent,
     SimpleFormComponent,
     AuthFormComponent,
+    OnPushStrategyComponent,
+    PushStrategyComponent,
+    DefaultStrategyComponent,
   ],
   imports: [BrowserModule, FormsModule],
   exports: [DashboardComponent],
