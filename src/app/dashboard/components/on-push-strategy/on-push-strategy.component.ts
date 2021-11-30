@@ -39,14 +39,15 @@ import {
 export class OnPushStrategyComponent {
   @Input() user: any;
 
-  // ngDoCheck(): void {
-  //   console.log('[OnPush] ngDoCheck');
-  // }
+  ngDoCheck(): void {
+    console.log('[OnPush] ngDoCheck');
+  }
 
   constructor(private cd: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('[OnPush] ngOnChanges', changes);
+    // this.cd
   }
 
   localUser = { name: 'John' };
@@ -64,9 +65,10 @@ export class OnPushStrategyComponent {
   handleChangeLocalPropertyViaSetTimeout() {
     console.log('[OnPush] handleChangeLocalPropertyViaSetTimeout');
     setTimeout(() => {
-      this.localUser.name = 'Tobzo';
       console.log('[OnPush] handleChangeLocalPropertyViaSetTimeout - changed');
-      this.cd.markForCheck();
-    }, 0);
+      this.localUser = { name: this.localUser.name + 1 };
+      console.log(this.localUser.name);
+      // this.cd.markForCheck();
+    }, 1000);
   }
 }
