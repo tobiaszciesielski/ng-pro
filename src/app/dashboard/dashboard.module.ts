@@ -15,6 +15,8 @@ import { PushStrategyComponent } from './containers/push-strategy/push-strategy.
 import { AuthFormComponent } from './containers/auth-form/auth-form.component';
 import { OnPushStrategyComponent } from './components/on-push-strategy/on-push-strategy.component';
 import { DefaultStrategyComponent } from './components/default-strategy/default-strategy.component';
+import { CreditCardNumberDirective } from './directives/credit-card-number.directive';
+import { DirectivesComponent } from './components/directives/directives.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { DefaultStrategyComponent } from './components/default-strategy/default-
     OnPushStrategyComponent,
     PushStrategyComponent,
     DefaultStrategyComponent,
+    CreditCardNumberDirective,
+    DirectivesComponent,
   ],
   imports: [BrowserModule, FormsModule],
   exports: [DashboardComponent],

@@ -30,9 +30,9 @@ import { Component, DoCheck, Input, SimpleChanges } from '@angular/core';
 export class DefaultStrategyComponent {
   @Input() user: any;
 
-  ngDoCheck(): void {
-    console.log('[Default] ngDoCheck');
-  }
+  // ngDoCheck(): void {
+  //   console.log('[Default] ngDoCheck');
+  // }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('[Default] ngOnChanges', changes);

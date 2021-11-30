@@ -39,9 +39,9 @@ import {
 export class OnPushStrategyComponent {
   @Input() user: any;
 
-  ngDoCheck(): void {
-    console.log('[OnPush] ngDoCheck');
-  }
+  // ngDoCheck(): void {
+  //   console.log('[OnPush] ngDoCheck');
+  // }
 
   constructor(private cd: ChangeDetectorRef) {}
 

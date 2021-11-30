@@ -7,7 +7,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
   template: `
     <div class="dashboard">
       <h2 class="dashboard__title">Dashboard Component</h2>
-      <dashboard-push-strategy class="dashboard__panel"></dashboard-push-strategy>
+      <dashboard-directives class="dashboard__panel"></dashboard-directives>
+      <dashboard-push-strategy
+        class="dashboard__panel"
+      ></dashboard-push-strategy>
       <dashboard-auth-panel class="dashboard__panel"></dashboard-auth-panel>
       <dashboard-auth-form class="dashboard__panel"></dashboard-auth-form>
     </div>
